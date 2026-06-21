@@ -1,4 +1,5 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>SEVN7 Trading Calculator</title> <style> *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; } body{ background:#050505; color:white; min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; } .container{ width:min(1200px,95%); border:1px solid #222; padding:40px; background:#000; } .logo{ color:#888; font-size:14px; letter-spacing:3px; margin-bottom:10px; } h1{ font-size:70px; margin-bottom:40px; } .input-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; } .input-box label{ display:block; margin-bottom:10px; color:#888; font-weight:bold; } .input-box input{ width:100%; padding:18px; background:#111; border:1px solid #222; color:white; font-size:30px; font-weight:bold; } .leverage-buttons{ display:flex; gap:10px; margin:25px 0; } .leverage-buttons button{ width:90px; height:50px; background:#111; border:1px solid #222; color:white; font-size:25px; cursor:pointer; } .leverage-buttons button.active{ background:white; color:black; } .results{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; } .card{ background:#050505; border:1px solid #222; padding:25px; } .card h3{ color:#888; margin-bottom:50px; } .card .value{ font-size:48px; font-weight:bold; } .green{ color:#14f195; } .red{ color:#ff5c6a; } .white-card{ background:#eaeaea; color:black; } .footer{ margin-top:20px; border:1px solid #222; display:grid; grid-template-columns:repeat(4,1fr); } .footer div{ padding:18px; text-align:center; font-size:26px; font-weight:bold; } @media (max-width: 768px){
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>SEVN7 Trading Calculator</title> 
+    <style> *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; } body{ background:#050505; color:white; min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; } .container{ width:min(1200px,95%); border:1px solid #222; padding:40px; background:#000; } .logo{ color:#888; font-size:14px; letter-spacing:3px; margin-bottom:10px; } h1{ font-size:70px; margin-bottom:40px; } .input-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; } .input-box label{ display:block; margin-bottom:10px; color:#888; font-weight:bold; } .input-box input{ width:100%; padding:18px; background:#111; border:1px solid #222; color:white; font-size:30px; font-weight:bold; } .leverage-buttons{ display:flex; gap:10px; margin:25px 0; } .leverage-buttons button{ width:90px; height:50px; background:#111; border:1px solid #222; color:white; font-size:25px; cursor:pointer; } .leverage-buttons button.active{ background:white; color:black; } .results{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; } .card{ background:#050505; border:1px solid #222; padding:25px; } .card h3{ color:#888; margin-bottom:50px; } .card .value{ font-size:48px; font-weight:bold; } .green{ color:#14f195; } .red{ color:#ff5c6a; } .white-card{ background:#eaeaea; color:black; } .footer{ margin-top:20px; border:1px solid #222; display:grid; grid-template-columns:repeat(4,1fr); } .footer div{ padding:18px; text-align:center; font-size:26px; font-weight:bold; } @media (max-width: 768px){
 
 @media (max-width: 768px){
     body{
@@ -35,4 +36,76 @@
     .card .value{
         font-size:32px;
     }
-} </style> </head> <body> <div class="container"> <div class="logo">SEVN7</div> <h1>Trading Calculator</h1> <div class="input-grid"> <div class="input-box"> <label>Margin (USDT)</label> <input id="margin" type="number" value="1"> </div> <div class="input-box"> <label>Leverage</label> <input id="leverage" type="number" value="500"> </div> <div class="input-box"> <label>Take Profit (%)</label> <input id="tp" type="number" value="8.22"> </div> <div class="input-box"> <label>Stop Loss (%)</label> <input id="sl" type="number" value="0.82"> </div> </div> <div class="leverage-buttons"> <button onclick="setLev(25)">25x</button> <button onclick="setLev(50)">50x</button> <button onclick="setLev(100)">100x</button> <button onclick="setLev(250)">250x</button> <button class="active" onclick="setLev(500)">500x</button> </div> <div class="results"> <div class="card white-card"> <h3>Position Size</h3> <div class="value" id="position">$500.00</div> </div> <div class="card"> <h3>Profit if TP hits</h3> <div class="value green" id="profit">$41.10</div> </div> <div class="card"> <h3>Loss if SL hits</h3> <div class="value red" id="loss">$4.10</div> </div> <div class="card"> <h3>Risk / Reward</h3> <div class="value" id="rr">10.02 : 1</div> </div> </div> <div class="footer"> <div>Position</div> <div>Margin × Leverage</div> <div>TP / SL</div> <div>Position × Chart %</div> </div> </div> <script> function calculate(){ const margin = parseFloat(document.getElementById("margin").value) || 0; const leverage = parseFloat(document.getElementById("leverage").value) || 0; const tp = parseFloat(document.getElementById("tp").value) || 0; const sl = parseFloat(document.getElementById("sl").value) || 0; const position = margin * leverage; const profit = position * (tp / 100); const loss = position * (sl / 100); const rr = loss > 0 ? (profit / loss).toFixed(2) : 0; document.getElementById("position").innerHTML = "$" + position.toFixed(2); document.getElementById("profit").innerHTML = "$" + profit.toFixed(2); document.getElementById("loss").innerHTML = "$" + loss.toFixed(2); document.getElementById("rr").innerHTML = rr + " : 1"; } function setLev(value){ document.getElementById("leverage").value = value; document.querySelectorAll(".leverage-buttons button") .forEach(btn => btn.classList.remove("active")); event.target.classList.add("active"); calculate(); } document.querySelectorAll("input").forEach(input=>{ input.addEventListener("input", calculate); }); calculate(); </script> </body> </html>
+    .copy-trade-section{
+    margin-top:40px;
+}
+
+.copy-trade-section h2{
+    margin-bottom:20px;
+    font-size:32px;
+}
+} </style> </head> <body> <div class="container"> <div class="logo">SEVN7</div> <h1>Trading Calculator</h1> <div class="input-grid"> <div class="input-box"> <label>Margin (USDT)</label> <input id="margin" type="number" value="1"> </div> <div class="input-box"> <label>Leverage</label> <input id="leverage" type="number" value="500"> </div> <div class="input-box"> <label>Take Profit (%)</label> <input id="tp" type="number" value="8.22"> </div> <div class="input-box"> <label>Stop Loss (%)</label> <input id="sl" type="number" value="0.82"> </div> </div> <div class="leverage-buttons"> <button onclick="setLev(25)">25x</button> <button onclick="setLev(50)">50x</button> <button onclick="setLev(100)">100x</button> <button onclick="setLev(250)">250x</button> <button class="active" onclick="setLev(500)">500x</button> </div> <div class="results"> <div class="card white-card"> <h3>Position Size</h3> <div class="value" id="position">$500.00</div> </div> <div class="card"> <h3>Profit if TP hits</h3> <div class="value green" id="profit">$41.10</div> </div> <div class="card"> <h3>Loss if SL hits</h3> <div class="value red" id="loss">$4.10</div> </div> <div class="card"> <h3>Risk / Reward</h3> <div class="value" id="rr">10.02 : 1</div> </div> </div> 
+    <div class="copy-trade-section">
+
+    <h2>Copy Trade Calculator</h2>
+
+    <div class="input-grid">
+
+        <div class="input-box">
+            <label>Trader Capital ($)</label>
+            <input id="traderCapital" type="number" value="1000">
+        </div>
+
+        <div class="input-box">
+            <label>Your Capital ($)</label>
+            <input id="myCapital" type="number" value="100">
+        </div>
+
+        <div class="input-box">
+            <label>Trader Profit ($)</label>
+            <input id="traderProfit" type="number" value="500">
+        </div>
+
+        <div class="input-box">
+            <label>Your Profit ($)</label>
+            <input id="copyProfit" type="text" readonly>
+        </div>
+
+    </div>
+
+</div>
+    <div class="footer"> <div>Position</div> <div>Margin × Leverage</div> <div>TP / SL</div> <div>Position × Chart %</div> </div> </div> <script> function calculate(){ const margin = parseFloat(document.getElementById("margin").value) || 0; const leverage = parseFloat(document.getElementById("leverage").value) || 0; const tp = parseFloat(document.getElementById("tp").value) || 0; const sl = parseFloat(document.getElementById("sl").value) || 0; const position = margin * leverage; const profit = position * (tp / 100); const loss = position * (sl / 100); const rr = loss > 0 ? (profit / loss).toFixed(2) : 0; document.getElementById("position").innerHTML = "$" + position.toFixed(2); document.getElementById("profit").innerHTML = "$" + profit.toFixed(2); document.getElementById("loss").innerHTML = "$" + loss.toFixed(2); document.getElementById("rr").innerHTML = rr + " : 1"; } function setLev(value){ document.getElementById("leverage").value = value; document.querySelectorAll(".leverage-buttons button") .forEach(btn => btn.classList.remove("active")); event.target.classList.add("active"); calculate(); } 
+        document.querySelectorAll("input").forEach(input=>{
+
+    input.addEventListener("input", ()=>{
+
+        calculate();
+        calculateCopyTrade();
+
+    });
+
+}); 
+        function calculateCopyTrade(){
+
+    const traderCapital =
+        parseFloat(document.getElementById("traderCapital").value) || 0;
+
+    const myCapital =
+        parseFloat(document.getElementById("myCapital").value) || 0;
+
+    const traderProfit =
+        parseFloat(document.getElementById("traderProfit").value) || 0;
+
+    let result = 0;
+
+    if(traderCapital > 0){
+        result =
+        (myCapital / traderCapital)
+        * traderProfit;
+    }
+
+    document.getElementById("copyProfit").value =
+        "$" + result.toFixed(2);
+}
+        calculate();
+calculateCopyTrade(); </script> </body> </html>
