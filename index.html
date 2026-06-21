@@ -3,173 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SEVN7 Trading Calculator Pro</title>
+<title>SEVN7 Trading Calculator</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Inter,Arial,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-    background:#0f1115;
-    color:#fff;
+    background:#050505;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     min-height:100vh;
-    padding:20px;
 }
 
 .container{
-    max-width:1400px;
-    margin:auto;
+    width:1200px;
+    border:1px solid #222;
+    padding:40px;
+    background:#000;
 }
 
 .logo{
-    color:#00c076;
+    color:#888;
     font-size:14px;
-    letter-spacing:4px;
-    margin-bottom:15px;
-    font-weight:700;
+    letter-spacing:3px;
+    margin-bottom:10px;
 }
 
 h1{
-    font-size:56px;
-    margin-bottom:35px;
+    font-size:70px;
+    margin-bottom:40px;
 }
 
 .input-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    gap:18px;
 }
 
 .input-box label{
     display:block;
-    margin-bottom:8px;
-    color:#8f98a3;
-    font-weight:600;
+    margin-bottom:10px;
+    color:#888;
+    font-weight:bold;
 }
 
 .input-box input{
     width:100%;
-    background:#1a1d24;
-    border:1px solid #2c313c;
-    color:white;
     padding:18px;
-    border-radius:10px;
-    font-size:26px;
-    font-weight:700;
+    background:#111;
+    border:1px solid #222;
+    color:white;
+    font-size:30px;
+    font-weight:bold;
 }
 
 .leverage-buttons{
     display:flex;
-    gap:12px;
-    margin:25px 0 35px;
-    flex-wrap:wrap;
+    gap:10px;
+    margin:25px 0;
 }
 
 .leverage-buttons button{
-    background:#1a1d24;
-    color:white;
-    border:1px solid #2c313c;
     width:90px;
     height:50px;
-    border-radius:8px;
+    background:#111;
+    border:1px solid #222;
+    color:white;
+    font-size:25px;
     cursor:pointer;
-    font-size:20px;
 }
 
 .leverage-buttons button.active{
-    background:#00c076;
-    color:#000;
-    border:none;
+    background:white;
+    color:black;
 }
 
 .results{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    gap:18px;
 }
 
 .card{
-    background:#15181f;
-    border:1px solid #262b35;
-    border-radius:12px;
+    background:#050505;
+    border:1px solid #222;
     padding:25px;
 }
 
 .card h3{
-    color:#9aa3af;
-    margin-bottom:30px;
+    color:#888;
+    margin-bottom:50px;
 }
 
-.value{
+.card .value{
     font-size:48px;
-    font-weight:800;
+    font-weight:bold;
 }
 
-.position{
-    background:#f5f5f5;
+.green{
+    color:#14f195;
+}
+
+.red{
+    color:#ff5c6a;
+}
+
+.white-card{
+    background:#eaeaea;
     color:black;
 }
 
-.profit{
-    color:#00e676;
-}
-
-.loss{
-    color:#ff4d61;
-}
-
-.footer-grid{
+.footer{
+    margin-top:20px;
+    border:1px solid #222;
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-top:40px;
 }
 
-.info-card{
-    background:#15181f;
-    border:1px solid #262b35;
-    border-radius:12px;
-    padding:25px;
+.footer div{
+    padding:18px;
     text-align:center;
-}
-
-.info-card h4{
-    margin-bottom:15px;
-}
-
-.info-card p{
-    color:#9aa3af;
-    line-height:1.6;
-}
-
-@media(max-width:900px){
-
-    h1{
-        font-size:42px;
-    }
-
-    .input-grid{
-        grid-template-columns:1fr;
-    }
-
-    .results{
-        grid-template-columns:1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr;
-    }
-
-    .value{
-        font-size:38px;
-    }
-
+    font-size:26px;
+    font-weight:bold;
 }
 </style>
 </head>
@@ -177,89 +139,71 @@ h1{
 
 <div class="container">
 
-<div class="logo">SEVN7 PRO</div>
+    <div class="logo">SEVN7</div>
+    <h1>Trading Calculator</h1>
 
-<h1>Trading Calculator</h1>
+    <div class="input-grid">
 
-<div class="input-grid">
+        <div class="input-box">
+            <label>Margin (USDT)</label>
+            <input id="margin" type="number" value="1">
+        </div>
 
-<div class="input-box">
-<label>Margin (USDT)</label>
-<input id="margin" type="number" value="10">
-</div>
+        <div class="input-box">
+            <label>Leverage</label>
+            <input id="leverage" type="number" value="500">
+        </div>
 
-<div class="input-box">
-<label>Leverage</label>
-<input id="leverage" type="number" value="50">
-</div>
+        <div class="input-box">
+            <label>Take Profit (%)</label>
+            <input id="tp" type="number" value="8.22">
+        </div>
 
-<div class="input-box">
-<label>Take Profit (%)</label>
-<input id="tp" type="number" value="8">
-</div>
+        <div class="input-box">
+            <label>Stop Loss (%)</label>
+            <input id="sl" type="number" value="0.82">
+        </div>
 
-<div class="input-box">
-<label>Stop Loss (%)</label>
-<input id="sl" type="number" value="2">
-</div>
+    </div>
 
-</div>
+    <div class="leverage-buttons">
+        <button onclick="setLev(25)">25x</button>
+        <button onclick="setLev(50)">50x</button>
+        <button onclick="setLev(100)">100x</button>
+        <button onclick="setLev(250)">250x</button>
+        <button class="active" onclick="setLev(500)">500x</button>
+    </div>
 
-<div class="leverage-buttons">
-<button onclick="setLev(25)">25x</button>
-<button class="active" onclick="setLev(50)">50x</button>
-<button onclick="setLev(100)">100x</button>
-<button onclick="setLev(250)">250x</button>
-<button onclick="setLev(500)">500x</button>
-</div>
+    <div class="results">
 
-<div class="results">
+        <div class="card white-card">
+            <h3>Position Size</h3>
+            <div class="value" id="position">$500.00</div>
+        </div>
 
-<div class="card position">
-<h3>Position Size</h3>
-<div class="value" id="position">$500.00</div>
-</div>
+        <div class="card">
+            <h3>Profit if TP hits</h3>
+            <div class="value green" id="profit">$41.10</div>
+        </div>
 
-<div class="card">
-<h3>Profit if TP Hits</h3>
-<div class="value profit" id="profit">$40.00</div>
-</div>
+        <div class="card">
+            <h3>Loss if SL hits</h3>
+            <div class="value red" id="loss">$4.10</div>
+        </div>
 
-<div class="card">
-<h3>Loss if SL Hits</h3>
-<div class="value loss" id="loss">$10.00</div>
-</div>
+        <div class="card">
+            <h3>Risk / Reward</h3>
+            <div class="value" id="rr">10.02 : 1</div>
+        </div>
 
-<div class="card">
-<h3>Risk / Reward</h3>
-<div class="value" id="rr">4 : 1</div>
-</div>
+    </div>
 
-</div>
-
-<div class="footer-grid">
-
-<div class="info-card">
-<h4>Position</h4>
-<p>Margin × Leverage</p>
-</div>
-
-<div class="info-card">
-<h4>Risk</h4>
-<p>Know exactly how much is at risk.</p>
-</div>
-
-<div class="info-card">
-<h4>Reward</h4>
-<p>Calculate potential gains instantly.</p>
-</div>
-
-<div class="info-card">
-<h4>Discipline</h4>
-<p>Trade based on numbers, not emotions.</p>
-</div>
-
-</div>
+    <div class="footer">
+        <div>Position</div>
+        <div>Margin × Leverage</div>
+        <div>TP / SL</div>
+        <div>Position × Chart %</div>
+    </div>
 
 </div>
 
@@ -267,49 +211,46 @@ h1{
 
 function calculate(){
 
-const margin =
-parseFloat(document.getElementById("margin").value)||0;
+    const margin = parseFloat(document.getElementById("margin").value) || 0;
+    const leverage = parseFloat(document.getElementById("leverage").value) || 0;
+    const tp = parseFloat(document.getElementById("tp").value) || 0;
+    const sl = parseFloat(document.getElementById("sl").value) || 0;
 
-const leverage =
-parseFloat(document.getElementById("leverage").value)||0;
+    const position = margin * leverage;
+    const profit = position * (tp / 100);
+    const loss = position * (sl / 100);
 
-const tp =
-parseFloat(document.getElementById("tp").value)||0;
+    const rr = loss > 0
+        ? (profit / loss).toFixed(2)
+        : 0;
 
-const sl =
-parseFloat(document.getElementById("sl").value)||0;
+    document.getElementById("position").innerHTML =
+        "$" + position.toFixed(2);
 
-const position = margin * leverage;
-const profit = position * (tp/100);
-const loss = position * (sl/100);
+    document.getElementById("profit").innerHTML =
+        "$" + profit.toFixed(2);
 
-document.getElementById("position").innerHTML =
-"$"+position.toFixed(2);
+    document.getElementById("loss").innerHTML =
+        "$" + loss.toFixed(2);
 
-document.getElementById("profit").innerHTML =
-"$"+profit.toFixed(2);
-
-document.getElementById("loss").innerHTML =
-"$"+loss.toFixed(2);
-
-document.getElementById("rr").innerHTML =
-loss > 0 ? (profit/loss).toFixed(2)+" : 1" : "0";
+    document.getElementById("rr").innerHTML =
+        rr + " : 1";
 }
 
-function setLev(v){
+function setLev(value){
 
-document.getElementById("leverage").value=v;
+    document.getElementById("leverage").value = value;
 
-document.querySelectorAll(".leverage-buttons button")
-.forEach(btn=>btn.classList.remove("active"));
+    document.querySelectorAll(".leverage-buttons button")
+        .forEach(btn => btn.classList.remove("active"));
 
-event.target.classList.add("active");
+    event.target.classList.add("active");
 
-calculate();
+    calculate();
 }
 
 document.querySelectorAll("input").forEach(input=>{
-input.addEventListener("input",calculate);
+    input.addEventListener("input", calculate);
 });
 
 calculate();
