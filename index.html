@@ -1,10 +1,13 @@
 <!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>SEVN7 Trading Calculator</title> <style> *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; } body{ background:#050505; color:white; min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; } .container{ width:1200px,95%); border:1px solid #222; padding:40px; background:#000; } .logo{ color:#888; font-size:14px; letter-spacing:3px; margin-bottom:10px; } h1{ font-size:70px; margin-bottom:40px; } .input-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; } .input-box label{ display:block; margin-bottom:10px; color:#888; font-weight:bold; } .input-box input{ width:100%; padding:18px; background:#111; border:1px solid #222; color:white; font-size:30px; font-weight:bold; } .leverage-buttons{ display:flex; gap:10px; margin:25px 0; } .leverage-buttons button{ width:90px; height:50px; background:#111; border:1px solid #222; color:white; font-size:25px; cursor:pointer; } .leverage-buttons button.active{ background:white; color:black; } .results{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; } .card{ background:#050505; border:1px solid #222; padding:25px; } .card h3{ color:#888; margin-bottom:50px; } .card .value{ font-size:48px; font-weight:bold; } .green{ color:#14f195; } .red{ color:#ff5c6a; } .white-card{ background:#eaeaea; color:black; } .footer{ margin-top:20px; border:1px solid #222; display:grid; grid-template-columns:repeat(4,1fr); } .footer div{ padding:18px; text-align:center; font-size:26px; font-weight:bold; } @media (max-width: 768px){
 
 @media (max-width: 768px){
+    body{
+        display:block;
+        padding:10px;
+    }
 
     .container{
-        width:95%;
-        padding:15px;
+        margin:auto;
     }
 
     h1{
