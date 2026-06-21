@@ -76,10 +76,6 @@
     
 } </style> </head> <body> <div class="container"> <div class="logo">SEVN7</div> <h1>Trading Calculator</h1> <div class="input-grid"> <div class="input-box"> <label>Margin (USDT)</label> <input id="margin" type="number" value="1"> </div> <div class="input-box"> <label>Leverage</label> <input id="leverage" type="number" value="500"> </div> <div class="input-box"> <label>Take Profit (%)</label> <input id="tp" type="number" value="8.22"> </div> <div class="input-box"> <label>Stop Loss (%)</label> <input id="sl" type="number" value="0.82"> </div> </div> <div class="leverage-buttons"> <button onclick="setLev(25)">25x</button> <button onclick="setLev(50)">50x</button> <button onclick="setLev(100)">100x</button> <button onclick="setLev(250)">250x</button> <button class="active" onclick="setLev(500)">500x</button> </div> 
     
-    <div class="results">
-...
-</div>
-
 <div class="footer">
     <div>Position</div>
     <div>Margin × Leverage</div>
@@ -91,10 +87,10 @@
 
     <h2>Copy Trade Calculator</h2>
 
-    ...
+    
 
 </div>
-    <div class="footer"> <div>Position</div> <div>Margin × Leverage</div> <div>TP / SL</div> <div>Position × Chart %</div> </div> </div> <script> function calculate(){ const margin = parseFloat(document.getElementById("margin").value) || 0; const leverage = parseFloat(document.getElementById("leverage").value) || 0; const tp = parseFloat(document.getElementById("tp").value) || 0; const sl = parseFloat(document.getElementById("sl").value) || 0; const position = margin * leverage; const profit = position * (tp / 100); const loss = position * (sl / 100); const rr = loss > 0 ? (profit / loss).toFixed(2) : 0; document.getElementById("position").innerHTML = "$" + position.toFixed(2); document.getElementById("profit").innerHTML = "$" + profit.toFixed(2); document.getElementById("loss").innerHTML = "$" + loss.toFixed(2); document.getElementById("rr").innerHTML = rr + " : 1"; } function setLev(value){ document.getElementById("leverage").value = value; document.querySelectorAll(".leverage-buttons button") .forEach(btn => btn.classList.remove("active")); event.target.classList.add("active"); calculate(); } 
+  
         document.querySelectorAll("input").forEach(input=>{
 
     input.addEventListener("input", ()=>{
