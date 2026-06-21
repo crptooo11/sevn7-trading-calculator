@@ -91,37 +91,4 @@
 
 </div>
   
-        document.querySelectorAll("input").forEach(input=>{
-
-    input.addEventListener("input", ()=>{
-
-        calculate();
-        calculateCopyTrade();
-
-    });
-
-}); 
-        function calculateCopyTrade(){
-
-    const traderCapital =
-        parseFloat(document.getElementById("traderCapital").value) || 0;
-
-    const myCapital =
-        parseFloat(document.getElementById("myCapital").value) || 0;
-
-    const traderProfit =
-        parseFloat(document.getElementById("traderProfit").value) || 0;
-
-    let result = 0;
-
-    if(traderCapital > 0){
-        result =
-        (myCapital / traderCapital)
-        * traderProfit;
-    }
-
-    document.getElementById("copyProfit").value =
-        "$" + result.toFixed(2);
-}
-        calculate();
-calculateCopyTrade(); </script> </body> </html>
+    
