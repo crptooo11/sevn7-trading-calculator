@@ -19,6 +19,24 @@
     font-size:32px;
     text-align:center;
 }
+        .section-divider{
+    border:none;
+    border-top:1px solid #222;
+    margin:60px 0 40px 0;
+}
+
+.copy-trade-section{
+    margin-top:40px;
+    padding:30px;
+    border:1px solid #222;
+    background:#050505;
+}
+
+.copy-trade-section h2{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:36px;
+}
 
 @media (max-width: 768px){
     body{
@@ -58,6 +76,7 @@
     
 } </style> </head> <body> <div class="container"> <div class="logo">SEVN7</div> <h1>Trading Calculator</h1> <div class="input-grid"> <div class="input-box"> <label>Margin (USDT)</label> <input id="margin" type="number" value="1"> </div> <div class="input-box"> <label>Leverage</label> <input id="leverage" type="number" value="500"> </div> <div class="input-box"> <label>Take Profit (%)</label> <input id="tp" type="number" value="8.22"> </div> <div class="input-box"> <label>Stop Loss (%)</label> <input id="sl" type="number" value="0.82"> </div> </div> <div class="leverage-buttons"> <button onclick="setLev(25)">25x</button> <button onclick="setLev(50)">50x</button> <button onclick="setLev(100)">100x</button> <button onclick="setLev(250)">250x</button> <button class="active" onclick="setLev(500)">500x</button> </div> <div class="results"> <div class="card white-card"> <h3>Position Size</h3> <div class="value" id="position">$500.00</div> </div> <div class="card"> <h3>Profit if TP hits</h3> <div class="value green" id="profit">$41.10</div> </div> <div class="card"> <h3>Loss if SL hits</h3> <div class="value red" id="loss">$4.10</div> </div> <div class="card"> <h3>Risk / Reward</h3> <div class="value" id="rr">10.02 : 1</div> </div> </div> 
     <div class="copy-trade-section">
+<hr class="section-divider">
 
     <h2>Copy Trade Calculator</h2>
 
